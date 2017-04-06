@@ -19,6 +19,12 @@ public class SafePathFinder extends PathFinder {
     /* TODO: Question 2
      * add your code below. you can add extra methods. 
      * */
+    
+//    Unfortunately, the enemy has become aware of the agent and has dispatched troops in the area. Your agent has
+//    been given a map of the territory controlled by the enemy, in addition to the terrain map as in Question 1.
+//    Analogous to the terrain, the map shows the strength of the enemy’s presence at each location. The dimensions of
+//    this map will be the same as that of the terrain map. All the strength indicators will be integers in the range [0,100]
+//    (with 0 and 100 included).
 
     
     

@@ -110,7 +110,6 @@ public class PathFinder {
 			Location current = frontier.peek();
 
 			if (current.equals(goal)) {
-				System.out.println("Goal found. ");
 				path = printPath(goal);
 				return path;
 			}
