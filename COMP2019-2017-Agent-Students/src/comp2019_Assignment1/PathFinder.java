@@ -101,12 +101,7 @@ public class PathFinder {
 		// B. If T is not in the open list: add it and compute its score
 		// C. If T is already in the open list: Check if the F score is lower when we use the current
 		// generated path to get there. if it is, update its score and update its parent as well
-
-
-		// TODO: Convert this breadth-first search algorithm into A*
-
 		// G Values
-
 		gVals.put(start, 0); // because it costs nothing to start
 
 		// BFS Implementation (working)
