@@ -72,19 +72,12 @@ public class PathFinder {
 	/* TODO: add your code below. you can add extra methods. */
 
 	public Path findPath() {
+		// Stops the Agent going above their terrain threshold
 		if (map.getValueAt(start) > terrainThreshold) {
 			return null;
 		}
-		//
-		//TODO Question1
-		// Implement A* search that finds the best path from start to goal.
-		// Return a Path object if a solution was found; return null otherwise.
-		// Refer to the assignment specification for details about the desired path.
-
 		// A* uses a heuristic function to calculate path
-		// 4x4 map, therefore search area is a total of 4*4 tiles (16)
-		// Two lists needed, open list and closed list
-		// closed is visited, open is frontier
+		// Two lists needed, frontier list and visited list
 
 		// Each tile is given a score of G + H where
 		// G is the cost from the start point to the current square
@@ -94,22 +87,17 @@ public class PathFinder {
 
 		// Cost of each square F = G + H
 
-		// 1. Get the square on the open list which has the lowest score.
-		// 2. Remove S from the open list and add S to the closed list
+		// 1. Get the square on the frontier list which has the lowest score.
+		// 2. Remove S from the frontier list and add S to the visited list
 		// 3. For each square T in S's walkable adjacent tiles:
-		// A. If T is in the closed list: ignore it
-		// B. If T is not in the open list: add it and compute its score
-		// C. If T is already in the open list: Check if the F score is lower when we use the current
+		// A. If T is in the visited list: ignore it
+		// B. If T is not in the frontier list: add it and compute its score
+		// C. If T is already in the frontier list: Check if the F score is lower when we use the current
 		// generated path to get there. if it is, update its score and update its parent as well
-
-
-		// TODO: Convert this breadth-first search algorithm into A*
-
 		// G Values
-
 		gVals.put(start, 0); // because it costs nothing to start
 
-		// BFS Implementation (working)
+		// Priority queue to hold all values of Locations, ordered with F values
 		PriorityQueue<Location> frontier = new PriorityQueue<Location>(map.getColumns() * map.getRows(), new fCompare());
 		frontier.add(start);
 
@@ -118,10 +106,10 @@ public class PathFinder {
 
 		while (!frontier.isEmpty()) {
 
+			// Takes the location with lowest f value
 			Location current = frontier.peek();
 
 			if (current.equals(goal)) {
-				System.out.println("Goal found. ");
 				path = printPath(goal);
 				return path;
 			}
@@ -131,6 +119,7 @@ public class PathFinder {
 
 			Iterable<Location> neighboursList = map.getNeighbours(current);
 			for (Location next : neighboursList) {
+				// If the Agent can't visit the next location, skip it
 				if (map.getValueAt(next) > terrainThreshold) {
 					continue;
 				}
